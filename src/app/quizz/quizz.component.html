@@ -1,1 +1,22 @@
-<p>quizz works!</p>
+
+  <h1>Angular Knowledge Quiz</h1>
+  <main>
+    <section>
+      <p>
+        Welcome to the Angular Essentials Quiz.
+        The total number of questions is: <strong>{{totalQuestions}}</strong>
+      </p>
+    </section>
+  <section>
+    <button  mat-raised-button color="accent" (click)="startQuiz()">Start Quiz</button>
+  </section>
+  <hr>
+  <section *ngIf="showQuestions" >
+    <app-question [currentQuestion]="currentQuestion"></app-question>
+    <p></p>
+    <button mat-raised-button color="primary" (click)="OnNextQuestion()" >Next</button>
+  </section>
+
+
+  <hr>
+</main>

@@ -1,1 +1,19 @@
-<p>question works!</p>
+<main>
+  <h2>
+    Question: {{currentQuestion.id + 1}}
+  </h2>
+  <section class="question-section">
+    <section>
+      <h3>{{currentQuestion.question}}</h3>
+    </section>
+      <form [formGroup]="questionForm">
+        <ul >
+          <li class="question-list" *ngFor="let option of currentQuestion.options">
+            <input #answerchoice type="radio"  value="{{option.id}}" formControlName="choice"/>
+           <span class="question-list-id"> <strong>{{option.id}}</strong>  : </span>  {{option.choice}}
+          </li>
+        </ul>
+        <button type="submit" (submit)="OnAnswer(answerchoice.value)"></button>
+      </form>
+  </section>
+</main>
