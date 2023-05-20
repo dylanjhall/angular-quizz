@@ -4,6 +4,6 @@ export interface Question {
   "id" : number,
   "question" : string,
   "options" : QuestionOptions[],
-  "answers" : string
+  "answer" : string
 }
 

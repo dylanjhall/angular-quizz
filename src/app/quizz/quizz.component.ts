@@ -1,6 +1,6 @@
-import { Component, Output } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton, MatButtonModule} from '@angular/material/button';
 import { QuestionComponent } from '../question/question.component';
 import { QuizService } from '../services/quiz.service';
 import { Question } from '../interfaces/question';
@@ -18,6 +18,7 @@ totalQuestions : number = 0;
 currentQuestionIndex : number = 0;
 score : number = 0;
 showQuestions : Boolean  = false;
+btnDisabled: Boolean = true;
 
 currentQuestion! : Question ;
 
@@ -29,6 +30,7 @@ constructor(private quizservice: QuizService) {
 startQuiz(){
   this.totalQuestions = this.quizservice.GetQuestionCount();
   this.showQuestions = true;
+  this.OnNextQuestion();
 }
 
 OnNextQuestion(){
@@ -40,6 +42,21 @@ OnNextQuestion(){
   } else {
     alert("all done");
   }
+}
+
+OnAnswer(event?: string){
+  console.debug(event);
+  if(event == this.currentQuestion.answer ){
+    this.ToggleNextButton();
+  }
+
+
+
+}
+
+ToggleNextButton(){
+
+  this.btnDisabled = !this.btnDisabled;
 }
 
 }

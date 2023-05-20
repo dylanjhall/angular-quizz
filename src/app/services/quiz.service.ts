@@ -17,7 +17,7 @@ export class QuizService {
       { id: "C", choice : "One or more files that contain an html template, styling and code" },
       { id: "D", choice : "None of the above" },
     ],
-    answers : "C"
+    answer : "C"
    },
    {
     id : 1,
@@ -29,7 +29,7 @@ export class QuizService {
       { id: "D", choice : "Schematic Generators" },
       { id: "E", choice : "All of the above" },
     ],
-    answers : "B"
+    answer : "B"
    },
 
   ]
