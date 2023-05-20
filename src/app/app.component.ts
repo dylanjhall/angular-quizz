@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { QuizzComponent } from './quizz/quizz.component';
+import { quizComponent } from './quiz/quiz.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, QuizzComponent],
+  imports: [CommonModule, RouterOutlet, quizComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-quizz';
+  title = 'angular-quiz';
 }

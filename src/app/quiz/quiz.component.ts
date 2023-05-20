@@ -2,25 +2,29 @@ import { Component, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatButton, MatButtonModule} from '@angular/material/button';
 import { QuestionComponent } from '../question/question.component';
+import { ResultComponent} from '../result/result.component';
 import { QuizService } from '../services/quiz.service';
 import { Question } from '../interfaces/question';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  selector: 'app-quizz',
+  selector: 'app-quiz',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, QuestionComponent],
-  templateUrl: './quizz.component.html',
-  styleUrls: ['./quizz.component.scss']
+  imports: [CommonModule, MatButtonModule, QuestionComponent, ResultComponent],
+  templateUrl: './quiz.component.html',
+  styleUrls: ['./quiz.component.scss']
 })
-export class QuizzComponent {
+export class quizComponent {
 
 totalQuestions : number = 0;
 currentQuestionIndex : number = 0;
 score : number = 0;
 showQuestions : Boolean  = false;
 btnDisabled: Boolean = true;
+showResults: Boolean = false;
 
 currentQuestion! : Question ;
+resetForm: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean> (false);
 
 constructor(private quizservice: QuizService) {
   this.totalQuestions = this.quizservice.GetQuestionCount();
@@ -34,28 +38,24 @@ startQuiz(){
 }
 
 OnNextQuestion(){
+  this.resetForm.next(true);
   if(this.currentQuestionIndex + 1 <= this.totalQuestions  ){
     this.currentQuestion = this.quizservice.ShowQuestion(this.currentQuestionIndex );
-    console.debug(this.currentQuestion);
-
     this.currentQuestionIndex++;
   } else {
+    this.showResults = true;
     alert("all done");
   }
 }
 
 OnAnswer(event?: string){
-  console.debug(event);
-  if(event == this.currentQuestion.answer ){
+
+ // if(event == this.currentQuestion.answer ){
     this.ToggleNextButton();
-  }
-
-
-
+ // }
 }
 
 ToggleNextButton(){
-
   this.btnDisabled = !this.btnDisabled;
 }
 

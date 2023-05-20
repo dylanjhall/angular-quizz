@@ -13,7 +13,7 @@
            <span class="question-list-id"> <strong>{{option.id}}</strong> </span>  {{option.choice}}
           </li>
         </ul>
-        <button mat-raised-button color="basic" (click)="OnCheckAnswer()">Submit Answer</button>
+        <button mat-raised-button color="basic" [disabled]="btnDisabled" (click)="OnCheckAnswer()">Submit Answer</button>
       </form>
   </section>
 </main>

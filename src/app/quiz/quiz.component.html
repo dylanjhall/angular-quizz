@@ -12,11 +12,11 @@
   </section>
   <hr>
   <section *ngIf="showQuestions" >
-    <app-question [currentQuestion]="currentQuestion"  (userChoice)="OnAnswer($event)" ></app-question>
+    <app-question [currentQuestion]="currentQuestion" [clearForm$]="resetForm"  (userChoice)="OnAnswer($event)" ></app-question>
     <p></p>
     <button #btnNextQuestion class="btn-next" mat-raised-button color="primary"  [disabled]="btnDisabled" (click)="OnNextQuestion()">Next</button>
   </section>
-
-
   <hr>
+
+  <app-result *ngIf="showResults" ></app-result>
 </main>

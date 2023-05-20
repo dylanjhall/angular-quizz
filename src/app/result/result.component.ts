@@ -9,5 +9,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent {
+  finalScore: number = 0;
 
+  RestartTest(){
+
+  }
 }
