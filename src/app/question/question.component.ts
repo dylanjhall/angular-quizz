@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { QuizService } from '../services/quiz.service';
 import { Question } from '../interfaces/question';
 import {MatButtonModule} from '@angular/material/button';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { BehaviorSubject, Observable, filter } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, filter } from 'rxjs';
 
 @Component({
   selector: 'app-question',
@@ -13,12 +13,13 @@ import { BehaviorSubject, Observable, filter } from 'rxjs';
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.scss']
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent implements OnInit, OnDestroy {
 @Input()  currentQuestion! : Question;
 @Input()  clearForm$: Observable<Boolean> =  new Observable<Boolean>();
 @Output('userChoice') userChoice: EventEmitter<string> = new EventEmitter<string>();
 questionForm!: FormGroup;
 btnDisabled: Boolean = false;
+clearFormSub : Subscription = new Subscription();
 
 
   constructor(fb: FormBuilder) {
@@ -26,8 +27,11 @@ btnDisabled: Boolean = false;
       answerchoice: ['', Validators.required]
     });
   }
+  ngOnDestroy(): void {
+    this.clearFormSub.unsubscribe();
+  }
   ngOnInit(): void {
-     var sub = this.clearForm$
+     this.clearFormSub = this.clearForm$
      .pipe(filter((v)=>  (v === true)))
      .subscribe((v) =>   this.OnResetForm()  );
   }
@@ -35,12 +39,8 @@ btnDisabled: Boolean = false;
  // should check answer here
   OnCheckAnswer(){
     const chosenAnswer = this.questionForm.controls['answerchoice'].value;
-    if(this.currentQuestion.answer === chosenAnswer ){
-      this.userChoice.emit(chosenAnswer);
-      this.btnDisabled = true;
-    }
-
-
+    this.userChoice.emit(chosenAnswer);
+    this.btnDisabled = true;
   }
 
   OnResetForm(){

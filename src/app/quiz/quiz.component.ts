@@ -49,10 +49,12 @@ OnNextQuestion(){
 }
 
 OnAnswer(event?: string){
-
- // if(event == this.currentQuestion.answer ){
+  console.debug(event)
+    if(this.currentQuestion.answer === event){
+      this.score++;
+      console.debug(this.score);
+    }
     this.ToggleNextButton();
- // }
 }
 
 ToggleNextButton(){
