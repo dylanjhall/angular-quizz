@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatButton, MatButtonModule} from '@angular/material/button';
 import { QuestionComponent } from '../question/question.component';
@@ -12,7 +12,9 @@ import { BehaviorSubject } from 'rxjs';
   standalone: true,
   imports: [CommonModule, MatButtonModule, QuestionComponent, ResultComponent],
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss']
+  styleUrls: ['./quiz.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class quizComponent {
 
@@ -44,7 +46,7 @@ OnNextQuestion(){
     this.currentQuestionIndex++;
   } else {
     this.showResults = true;
-    alert("all done");
+    this.showQuestions = false;
   }
 }
 
@@ -52,9 +54,10 @@ OnAnswer(event?: string){
   console.debug(event)
     if(this.currentQuestion.answer === event){
       this.score++;
-      console.debug(this.score);
     }
-    this.ToggleNextButton();
+
+    this.OnNextQuestion();
+
 }
 
 ToggleNextButton(){

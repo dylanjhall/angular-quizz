@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule, NgFor } from '@angular/common';
 import { QuizService } from '../services/quiz.service';
 import { Question } from '../interfaces/question';
@@ -11,7 +11,8 @@ import { BehaviorSubject, Observable, Subscription, filter } from 'rxjs';
   standalone: true,
   imports: [CommonModule, NgFor, ReactiveFormsModule, MatButtonModule],
   templateUrl: './question.component.html',
-  styleUrls: ['./question.component.scss']
+  styleUrls: ['./question.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuestionComponent implements OnInit, OnDestroy {
 @Input()  currentQuestion! : Question;
@@ -40,7 +41,7 @@ clearFormSub : Subscription = new Subscription();
   OnCheckAnswer(){
     const chosenAnswer = this.questionForm.controls['answerchoice'].value;
     this.userChoice.emit(chosenAnswer);
-    this.btnDisabled = true;
+   // this.btnDisabled = true;
   }
 
   OnResetForm(){
