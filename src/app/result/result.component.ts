@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,5 +9,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent {
+ @Input('finalScore') finalScore: number = 0;
 
+  RestartTest(){
+
+  }
 }
