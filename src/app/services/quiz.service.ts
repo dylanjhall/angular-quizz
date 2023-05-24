@@ -31,6 +31,17 @@ export class QuizService {
     ],
     answer : "B"
    },
+   {
+    id : 3,
+    question : "What are the differences between Angular and AngularJS?",
+    options: [
+      { id: "A", choice :"The language used to develop AngularJS is javascript while in Angular it is TypeScript" },
+      { id: "B", choice : "AngularJS is no longer supported" },
+      { id: "C", choice : "AngularJS and Angular were developed by Google" },
+      { id: "D", choice : "All of the above" }
+    ],
+    answer : "D"
+   },
 
   ]
 
